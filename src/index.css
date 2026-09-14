@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@custom-variant light (.light &);
+
+@utility animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+@utility animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@theme {
+  --color-pokemon-normal: #A8A77A;
+  --color-pokemon-fire: #EE8130;
+  --color-pokemon-water: #6390F0;
+  --color-pokemon-electric: #F7D02C;
+  --color-pokemon-grass: #7AC74C;
+  --color-pokemon-ice: #96D9D6;
+  --color-pokemon-fighting: #C22E28;
+  --color-pokemon-poison: #A33EA1;
+  --color-pokemon-ground: #E2BF65;
+  --color-pokemon-flying: #A98FF3;
+  --color-pokemon-psychic: #F95587;
+  --color-pokemon-bug: #A6B91A;
+  --color-pokemon-rock: #B8A038;
+  --color-pokemon-ghost: #705898;
+  --color-pokemon-dragon: #6F35FC;
+  --color-pokemon-dark: #705746;
+  --color-pokemon-steel: #B7B7CE;
+  --color-pokemon-fairy: #D899AF;
+  --color-pokemon-unknown: #68A090;
+  --color-pokemon-shadow: #493963;
+  
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --animate-fade-in: fade-in 0.25s ease-out forwards;
+  --animate-slide-up: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scale-up: scale-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Custom scrollbars, glassmorphism utilities, and base styles */
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans transition-colors duration-300 overflow-x-hidden;
+  }
+  
+  .light body {
+    @apply bg-slate-50 text-slate-900;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+  }
+  .light ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 hover:bg-slate-400;
+  }
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.light .glass-card:hover {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+}
+
+/* Custom glow borders matched to type properties */
+.glow-normal { box-shadow: 0 0 15px -3px rgba(168, 167, 122, 0.25); }
+.glow-fire { box-shadow: 0 0 15px -3px rgba(238, 129, 48, 0.25); }
+.glow-water { box-shadow: 0 0 15px -3px rgba(99, 144, 240, 0.25); }
+.glow-electric { box-shadow: 0 0 15px -3px rgba(247, 208, 44, 0.25); }
+.glow-grass { box-shadow: 0 0 15px -3px rgba(122, 199, 76, 0.25); }
+.glow-ice { box-shadow: 0 0 15px -3px rgba(150, 217, 214, 0.25); }
+.glow-fighting { box-shadow: 0 0 15px -3px rgba(194, 46, 40, 0.25); }
+.glow-poison { box-shadow: 0 0 15px -3px rgba(163, 62, 161, 0.25); }
+.glow-ground { box-shadow: 0 0 15px -3px rgba(226, 191, 101, 0.25); }
+.glow-flying { box-shadow: 0 0 15px -3px rgba(169, 143, 243, 0.25); }
+.glow-psychic { box-shadow: 0 0 15px -3px rgba(249, 85, 135, 0.25); }
+.glow-bug { box-shadow: 0 0 15px -3px rgba(166, 185, 26, 0.25); }
+.glow-rock { box-shadow: 0 0 15px -3px rgba(184, 160, 56, 0.25); }
+.glow-ghost { box-shadow: 0 0 15px -3px rgba(112, 88, 152, 0.25); }
+.glow-dragon { box-shadow: 0 0 15px -3px rgba(111, 53, 252, 0.25); }
+.glow-dark { box-shadow: 0 0 15px -3px rgba(112, 87, 70, 0.25); }
+.glow-steel { box-shadow: 0 0 15px -3px rgba(183, 183, 206, 0.25); }
+.glow-fairy { box-shadow: 0 0 15px -3px rgba(216, 153, 175, 0.25); }
+
+/* Skeleton animation overrides */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-wrapper::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.08) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 2s infinite;
+  content: '';
+}
+
+.light .shimmer-wrapper::after {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.02) 20%,
+    rgba(0, 0, 0, 0.05) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@keyframes pokeball-shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-18deg); }
+  40% { transform: rotate(18deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(8deg); }
+}
+
+.animate-pokeball-shake {
+  animation: pokeball-shake 0.8s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
